@@ -63,12 +63,12 @@ class priceOption(pathSimulator):
         else:
             return self.payoff_model.payoff(x,K)
     
-    def call_price(self,K):
+    def call_price(self,K,rates,expiry):
         y = []
         for i in self.paths:
             y.append(self.payoff_func(i,K))
 
         y = np.array(y)
-        c = sum(y*np.exp(-0.03/12*3.0))/10000
+        c = sum(y*np.exp(-rates/12*expiry))/self.num_path
         return c
     

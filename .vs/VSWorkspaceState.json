@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\options",
     "\\utilities"
   ],
-  "SelectedNode": "\\utilities\\simulate_brownian.py",
+  "SelectedNode": "\\main.py",
   "PreviewInSolutionExplorer": false
 }
