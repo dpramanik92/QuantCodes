@@ -17,17 +17,18 @@ class getSummary:
     def __init__(self,**kwargs):
         self.rate = kwargs.get('rate')
         self.infile = kwargs.get('portfolio')
+        benchmark = kwargs.get('benchmark')
         
         self.port = Portfolio(portfolio=self.infile,cols=['Ticker','Quantity'])
 
         self.ts = self.port.get_portfolio_ts('Quantity')
         self.ts['Return'] = self.ts['Portfolio'].pct_change()
         self.model = kwargs.get('model')
-        self.analys = portAnalytics(self.port,self.rate)
+        self.analys = portAnalytics(self.port,self.rate,benchmark)
         self.ts = self.analys.portfolio_ts
 
     
-    def risk_metrics(self,level,days,time):
+    def risk_metrics(self,level,days,time,outfile):
         print("===========================================================================")
         self.var = self.analys.calc_portfolio_VaR(level,days,model=self.model)
         print('The Var is :',self.var)
@@ -41,7 +42,7 @@ class getSummary:
         today = datetime.datetime.today().date().strftime('%d-%m-%Y')
         print("===========================================================================")
         
-        summary_file = r'C:\Users\MSUSERSL123\Documents\financials\portfolio_stats.csv'
+        summary_file = outfile
 
         if os.path.exists(summary_file) == True:
             df_summary = pd.read_csv(summary_file)

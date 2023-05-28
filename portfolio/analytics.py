@@ -18,11 +18,11 @@ def get_benchseries(ticker):
         return data['Close']
 
 class portAnalytics:
-    def __init__(self,portfolio,rate):
+    def __init__(self,portfolio,rate,benchmark):
         self.port = portfolio
         self.portfolio_ts = self.port.portfolio_ts
         self.rate=rate
-        bm = get_benchseries('^nsei')
+        bm = get_benchseries(benchmark)
         self.bm = pd.DataFrame(bm)
         self.bm['Return'] = self.bm['Close'].pct_change()
         self.portfolio_ts['Compare'] = self.bm['Close']*self.portfolio_ts['Portfolio'][0]/self.bm['Close'][0]
