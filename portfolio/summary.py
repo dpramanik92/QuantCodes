@@ -51,7 +51,7 @@ class getSummary:
         
         data_dict = {'Date':today,'Portfolio Value':self.ts['Portfolio'][-1],'Tracking Error':self.te,'Sharpe Ratio':self.sharpe,'1D VaR':self.var,'Last Return':(self.ts['Portfolio'][-1]-self.ts['Portfolio'][-2]),'Daily Returns (%)':"{:2.1f} %".format((self.ts['Portfolio'][-1]-self.ts['Portfolio'][-2])/self.ts['Portfolio'][-2]*100)}
         df_summary = df_summary.append(data_dict,ignore_index=True)
-        df_summary = df_summary.drop_duplicates()
+        df_summary = df_summary.drop_duplicates(subset=['Date'],keep='last')
         df_summary.to_csv(summary_file,index=False)
         
         
@@ -63,6 +63,6 @@ class getSummary:
         pf_wgt.set_index('Name',inplace=True)
         self.pf_wgt = pf_wgt.copy(deep=True)
         
-    def get_summary(self,level,days,time):
-        self.risk_metrics(level,days,time)
+    def get_summary(self,level,days,time,outfile):
+        self.risk_metrics(level,days,time,outfile)
         self.get_composition()
