@@ -36,8 +36,8 @@ class getSummary:
         print('The Sharpe Ratio is: ',self.sharpe)
         self.te = self.analys.calc_tracking_error(time)
         print('The Tracking error is: ',self.te)
-        self.annual_return = (self.ts['Portfolio'][-1]-self.ts['Portfolio'][0])/self.ts['Portfolio'][-1]*100
-        self.bench_return = (self.ts['Compare'][-1]-self.ts['Compare'][0])/self.ts['Compare'][-1]*100
+        self.annual_return = (self.ts['Portfolio'][-1]-self.ts['Portfolio'][0])/self.ts['Portfolio'][0]*100
+        self.bench_return = (self.ts['Compare'][-1]-self.ts['Compare'][0])/self.ts['Compare'][0]*100
 
         print('The annualized return is : {} %'.format(self.annual_return))
         print('The benchmark return is : {} %'.format(self.bench_return))
